@@ -1,0 +1,19 @@
+#sameBox{
+  opacity: 0; height: 0px;
+
+  position: absolute;
+  border: 1px solid #f1f1f1;
+  width: 400px;
+  height: 100px;
+  overflow-y: scroll;
+  padding: 16px;
+  box-shadow: 3px 6px 10px #00000033;
+  background: white;
+  border-radius: 5px;
+  overflow-x: hidden;
+  margin-top:7px;
+  margin-left: -1px;
+}
+#clear{
+  cursor: pointer;
+}
