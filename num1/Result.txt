@@ -1,0 +1,25 @@
+Написан запрос к базе данных MySQL (5.6),
+формирующий последовательные интервалы работы разных пользователей с указанным клиентом и кол-во дней работы
+
+
+
+select 
+`UserID`,`DateStart`, `DateEnd`,`days`
+from
+(
+select 
+    
+    `UserID` `UserID`,
+    `Date` `DateStart`,
+    @dateNow:=`Date`,
+    @idNow:=`RecordID`,
+    @idNext:=(select `RecordID` from log WHERE `RecordID`>@idNow LIMIT 1 ),
+    @dateNext:=(select `Date` from log WHERE `RecordID` = @idNext ) ,
+    @dateNext:=IFNULL(@dateNext,DATE(NOW())) `DateEnd`,
+    
+    DATEDIFF(@dateNext,@dateNow)+1 `days`
+  
+from 
+  log t,
+  (select @idNext='1', @idNow='0', @dateNext='2019-02-01', @dateNow='2019-02-01') z
+) zz
